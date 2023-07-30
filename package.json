@@ -16,14 +16,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "meimei-ai.helloWorld",
-        "title": "Hello World"
-      },
-      {
-        "command": "meimei-ai.helloWorldGPT",
-        "title": "Hello WorldGPT"
-      },
-      {
         "command": "meimei-ai.テスト",
         "title": "テスト"
       }
