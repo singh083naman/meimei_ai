@@ -2,6 +2,27 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
+import fetch from 'node-fetch';
+
+(global as any).fetch = fetch;
+import { ChatGPTAPI } from 'chatgpt';
+
+
+async function example() {
+	console.log("かいし");
+	try {
+		const api = new ChatGPTAPI({
+			apiKey: "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",
+		});
+		const res = await api.sendMessage('恵比寿のおすすめのお店を教えて');
+		return res.text;
+	} catch(e) {
+		console.log(e);
+		return "era-desu";
+	}
+	console.log("終わり");
+}
+
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -19,8 +40,13 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage('Hello World from meimei_ai!');
 	});
 
-	context.subscriptions.push(disposable);
-}
+	const helloWorldGPT = vscode.commands.registerCommand('meimei-ai.helloWorldGPT', async () => {
+		// The code you place here will be executed every time your command is executed
+		// Display a message box to the user
+		const text = await example();
+		vscode.window.showInformationMessage(text);
+	});
 
-// This method is called when your extension is deactivated
-export function deactivate() {}
+	context.subscriptions.push(disposable);
+	context.subscriptions.push(helloWorldGPT);
+}
