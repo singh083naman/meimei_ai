@@ -7,6 +7,8 @@ import fetch from "node-fetch";
 (global as any).fetch = fetch;
 import { ChatGPTAPI } from "chatgpt";
 
+const names: string[] = [];
+
 const example = async () => {
   // console.log("入った", process.env.OPENAI_API_KEY);
   // if (!process.env.OPENAI_API_KEY) {
@@ -48,6 +50,7 @@ const example = async () => {
       const obj = JSON.parse(res.text);
       console.log("オブジェ", obj);
       const array = obj.result;
+      names.push(array);
 
       // 関数名の候補をユーザに提示し、選択させる
       let pickedFunctionName = await vscode.window.showQuickPick(array, {
@@ -95,4 +98,60 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(disposable);
   context.subscriptions.push(helloWorldGPT);
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand("meimei-ai.テスト", () => {
+      const editor = vscode.window.activeTextEditor;
+      if (editor) {
+        const document = editor.document;
+        const selection = editor.selection;
+
+        // 選択されたテキストを取得します。
+        const text = document.getText(selection);
+
+        // ここでテキストに対するあなたの処理を行います。
+        // await example(text); // text を引数として渡す
+        // そしてその結果に基づいて提案を作成します。
+        const items: vscode.CompletionItem[] = [
+          new vscode.CompletionItem("Suggested Function 1"),
+          new vscode.CompletionItem("Suggested Function 2"),
+          new vscode.CompletionItem("Suggested Function 3"),
+        ];
+
+        // 最後に、その提案を選択されたテキストの位置に挿入します。
+        for (const item of items) {
+          if (typeof item.label === "string") {
+            editor.insertSnippet(new vscode.SnippetString(item.label), selection);
+          }
+        }
+      }
+    }),
+  );
+
+  // context.subscriptions.push(
+  //   vscode.languages.registerCompletionItemProvider(
+  //     { pattern: "**" },
+  //     {
+  //       async provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
+  //         console.log("きた");
+  //         if (names.length === 0) {
+  //           await example();
+  //           const items: vscode.CompletionItem[] = [
+  //             new vscode.CompletionItem("Suggested Function 1"),
+  //             new vscode.CompletionItem("Suggested Function 2"),
+  //             new vscode.CompletionItem("Suggested Function 3"),
+  //           ];
+  //           return items;
+  //         }
+  //         const items: vscode.CompletionItem[] = [
+  //           new vscode.CompletionItem("Suggested Function 1"),
+  //           new vscode.CompletionItem("Suggested Function 2"),
+  //           new vscode.CompletionItem("Suggested Function 3"),
+  //         ];
+  //         return [];
+  //       },
+  //     },
+  //     ".", // ピリオドでトリガー
+  //   ),
+  // );
 }
