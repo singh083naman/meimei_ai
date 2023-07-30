@@ -1,52 +1,51 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 
 (global as any).fetch = fetch;
-import { ChatGPTAPI } from 'chatgpt';
+import { ChatGPTAPI } from "chatgpt";
 
-
-async function example() {
-	console.log("かいし");
-	try {
-		const api = new ChatGPTAPI({
-			apiKey: "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",
-		});
-		const res = await api.sendMessage('恵比寿のおすすめのお店を教えて');
-		return res.text;
-	} catch(e) {
-		console.log(e);
-		return "era-desu";
-	}
-	console.log("終わり");
-}
+const example = async () => {
+  if (!process.env.OPENAI_API_KEY) {
+    return "APIキーが設定されていません。";
+  }
+  try {
+    const api = new ChatGPTAPI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+    const res = await api.sendMessage("恵比寿のおすすめのお店を教えて");
+    return res.text;
+  } catch (e) {
+    console.log("エラー", e);
+    return "";
+  }
+};
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+  // Use the console to output diagnostic information (console.log) and errors (console.error)
+  // This line of code will only be executed once when your extension is activated
+  console.log('Congratulations, your extension "meimei-ai" is now active!');
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "meimei-ai" is now active!');
+  // The command has been defined in the package.json file
+  // Now provide the implementation of the command with registerCommand
+  // The commandId parameter must match the command field in package.json
+  let disposable = vscode.commands.registerCommand("meimei-ai.helloWorld", () => {
+    // The code you place here will be executed every time your command is executed
+    // Display a message box to the user
+    vscode.window.showInformationMessage("Hello World from meimei_ai!");
+  });
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('meimei-ai.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from meimei_ai!');
-	});
+  const helloWorldGPT = vscode.commands.registerCommand("meimei-ai.helloWorldGPT", async () => {
+    // The code you place here will be executed every time your command is executed
+    // Display a message box to the user
+    const text = await example();
+    vscode.window.showInformationMessage(text);
+  });
 
-	const helloWorldGPT = vscode.commands.registerCommand('meimei-ai.helloWorldGPT', async () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		const text = await example();
-		vscode.window.showInformationMessage(text);
-	});
-
-	context.subscriptions.push(disposable);
-	context.subscriptions.push(helloWorldGPT);
+  context.subscriptions.push(disposable);
+  context.subscriptions.push(helloWorldGPT);
 }
