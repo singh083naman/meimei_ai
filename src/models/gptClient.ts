@@ -5,12 +5,12 @@ import { FetchGptResponse } from "~/types";
 
 
 export class GptClient {
-  functionNamePrompt(selectedText: string) {
+  functionNamePrompt(selectedFunctionText: string) {
     const prompt = `
       Please come up with six possible names for the following functions and output them in the following json format.
       Don't include any explanations in your responses.
       \`\`\`
-        ${selectedText}
+        ${selectedFunctionText}
       \`\`\`
 
       \`\`\`json
@@ -23,7 +23,7 @@ export class GptClient {
   async fetchSuggestionNames(prompt: string) {
     try {
       const api = new ChatGPTAPI({
-        apiKey: "自分のapiKey",
+        apiKey: "自分のapikey",
       });
       const res = await api.sendMessage(prompt);
       const gptResponse: FetchGptResponse = JSON.parse(res.text);
