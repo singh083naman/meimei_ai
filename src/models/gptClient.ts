@@ -23,7 +23,7 @@ export class GptClient {
   async fetchSuggestionNames(prompt: string) {
     try {
       const api = new ChatGPTAPI({
-        apiKey: "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",
+        apiKey: "自分のapiKey",
       });
       const res = await api.sendMessage(prompt);
       const gptResponse: FetchGptResponse = JSON.parse(res.text);
