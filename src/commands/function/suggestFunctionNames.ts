@@ -7,7 +7,8 @@ export const suggestFunctionNames = async () => {
   if (editor) {
     const editorClient = new EditorClient(editor);
     const gptClient = new GptClient();
-    const prompt = gptClient.functionNamePrompt(editorClient.getSelectedText());
+    const selectedText = editorClient.getSelectedText();
+    const prompt = gptClient.functionNamePrompt(selectedText);
 
     try {
       const suggestionNames = await gptClient.fetchSuggestionNames(prompt);
@@ -17,7 +18,7 @@ export const suggestFunctionNames = async () => {
 
       if (pickedName) {
         // ユーザが選択した名前で、選択範囲の「xxx」の部分を置き換える
-        editorClient.replaceWithPickedName(pickedName);
+        editorClient.replaceNameWithPickedName(selectedText, pickedName);
       }
     } catch (e: unknown) {
       console.log("error:", e);

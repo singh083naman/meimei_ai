@@ -21,9 +21,7 @@ export class EditorClient {
     });
   }
 
-  replaceWithPickedName(pickedName: string) {
-    const selectedText = this.getSelectedText();
-
+  replaceNameWithPickedName(selectedText: string, pickedName: string) {
     this.editor.edit((editBuilder) => {
       editBuilder.replace(this.selection, selectedText.replace("xxx", pickedName));
     });
