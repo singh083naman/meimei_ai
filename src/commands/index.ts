@@ -1,1 +1,2 @@
-export { suggestFunctionNames } from "./function/suggestFunctionNames";
+export { suggestFunctionNames } from "./suggestFunctionNames";
+export { setApiKey } from "./setApiKey";
