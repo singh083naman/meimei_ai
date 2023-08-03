@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import nameSettings from "~/name-settings.json";
 
 export class EditorClient {
   editor: vscode.TextEditor;
@@ -13,6 +14,10 @@ export class EditorClient {
 
   getSelectedText() {
     return this.document.getText(this.selection);
+  }
+
+  getSelectedFileLanguageId() {
+    return this.document.languageId;
   }
 
   pickSuggestionName(suggestionNames: string[], placeHolder: string) {
