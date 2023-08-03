@@ -4,14 +4,14 @@ export type FetchGptResponse = {
   result: string[];
 };
 
-type Nameformat = "lower camel case" | "upper camel case" | "snake case";
+type NameFormat = "lower camel case" | "upper camel case" | "snake case";
 export type NameSettingsKeys = keyof typeof nameSettings;
 export type NameSettings = {
-  [language in NameSettingsKeys]: {
-    class?: Nameformat,
-    struct?: Nameformat,
-    function: Nameformat,
-    method: Nameformat,
-    variable: Nameformat,
-  }
+  [language in NameSettingsKeys]: Omit<{
+    class: NameFormat,
+    struct: NameFormat,
+    function: NameFormat,
+    method: NameFormat,
+    variable: NameFormat,
+  }, language extends "go" ? "class" : "struct">
 };
