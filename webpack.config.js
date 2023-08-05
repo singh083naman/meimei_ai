@@ -6,6 +6,7 @@ const path = require('path');
 
 //@ts-check
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
 /** @type WebpackConfig */
 const extensionConfig = {
@@ -25,7 +26,8 @@ const extensionConfig = {
   },
   resolve: {
     // support reading TypeScript and JavaScript files, 📖 -> https://github.com/TypeStrong/ts-loader
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
+    plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
   },
   module: {
     rules: [

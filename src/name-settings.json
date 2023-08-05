@@ -1,0 +1,20 @@
+{
+  "ruby": {
+    "class": "upper camel case",
+    "function": "snake case",
+    "method": "snake case",
+    "variable": "snake case"
+  },
+  "go": {
+    "struct": "upper camel case",
+    "function": "upper camel case",
+    "method": "upper camel case",
+    "variable": "lower camel case"
+  },
+  "typescript": {
+    "class": "upper camel case",
+    "function": "lower camel case",
+    "method": "lower camel case",
+    "variable": "lower camel case"
+  }
+}
