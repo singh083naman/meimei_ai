@@ -10,13 +10,12 @@ import {
   NameTarget,
   nameFormats,
 } from "~/types";
-import { prepareApiKey } from "~/utils/apiKey";
 
 export class GptClient {
-  context: vscode.ExtensionContext;
+  apiKey: string;
 
-  constructor(context: vscode.ExtensionContext) {
-    this.context = context;
+  constructor(apiKey: string) {
+    this.apiKey = apiKey;
   }
 
   namePrompt(
@@ -56,9 +55,8 @@ export class GptClient {
 
   async fetchSuggestionNames(prompt: string) {
     try {
-      const apiKey = await prepareApiKey(this.context);
       const api = new ChatGPTAPI({
-        apiKey,
+        apiKey: this.apiKey,
       });
       const res = await api.sendMessage(prompt);
       const gptResponse: FetchGptResponse = JSON.parse(res.text);

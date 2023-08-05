@@ -3,12 +3,12 @@ import { EditorClient, GptClient } from "~/models";
 import nameSettings from "~/name-settings.json";
 import { NameSettings } from "~/types";
 
-export const suggestFunctionNames = async (context: vscode.ExtensionContext) => {
+export const suggestFunctionNames = async (apiKey: string) => {
   const editor = vscode.window.activeTextEditor;
 
   if (editor) {
     const editorClient = new EditorClient(editor);
-    const gptClient = new GptClient(context);
+    const gptClient = new GptClient(apiKey);
     const selectedText = editorClient.getSelectedText();
     const languageId = editorClient.getSelectedFileLanguageId();
     const prompt = gptClient.namePrompt(
