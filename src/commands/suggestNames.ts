@@ -1,9 +1,9 @@
 import * as vscode from "vscode";
 import { EditorClient, GptClient } from "~/models";
 import nameSettings from "~/name-settings.json";
-import { NameSettings } from "~/types";
+import { NameSettings, NameTarget } from "~/types";
 
-export const suggestFunctionNames = async (apiKey: string) => {
+export const suggestNames = async (apiKey: string, namingTarget: NameTarget) => {
   const editor = vscode.window.activeTextEditor;
 
   if (editor) {
@@ -15,7 +15,7 @@ export const suggestFunctionNames = async (apiKey: string) => {
       selectedText,
       languageId,
       nameSettings as NameSettings,
-      "function",
+      namingTarget,
     );
 
     try {

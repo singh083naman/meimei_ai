@@ -1,18 +1,39 @@
 import * as vscode from "vscode";
-import { suggestFunctionNames, setApiKey } from "./commands";
+import { suggestNames, setApiKey } from "./commands";
 import { prepareApiKey } from "./utils/apiKey";
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand("meimei-ai.suggest-function-names", async () => {
+    vscode.commands.registerCommand("mei-ai.suggest-function-names", async () => {
       const apiKey = await prepareApiKey(context);
-      await suggestFunctionNames(apiKey);
+      await suggestNames(apiKey, "function");
     }),
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand(
-      "meimei-ai.change-api-key",
-      async () => await setApiKey(context),
-    ),
+    vscode.commands.registerCommand("mei-ai.suggest-class-names", async () => {
+      const apiKey = await prepareApiKey(context);
+      await suggestNames(apiKey, "class");
+    }),
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("mei-ai.suggest-struct-names", async () => {
+      const apiKey = await prepareApiKey(context);
+      await suggestNames(apiKey, "struct");
+    }),
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("mei-ai.suggest-method-names", async () => {
+      const apiKey = await prepareApiKey(context);
+      await suggestNames(apiKey, "method");
+    }),
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("mei-ai.suggest-variable-names", async () => {
+      const apiKey = await prepareApiKey(context);
+      await suggestNames(apiKey, "variable");
+    }),
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("mei-ai.change-api-key", async () => await setApiKey(context)),
   );
 }
