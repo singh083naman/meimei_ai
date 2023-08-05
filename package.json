@@ -18,12 +18,20 @@
       {
         "command": "meimei-ai.suggest-function-names",
         "title": "meimei-ai: suggest function names"
+      },
+      {
+        "command": "meimei-ai.change-api-key",
+        "title": "meimei-ai: change api key"
       }
     ],
     "menus": {
       "editor/context": [
         {
           "command": "meimei-ai.suggest-function-names",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "meimei-ai.change-api-key",
           "when": "editorHasSelection"
         }
       ]

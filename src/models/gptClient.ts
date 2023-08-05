@@ -1,3 +1,4 @@
+import * as vscode from "vscode";
 import fetch from "node-fetch";
 (global as any).fetch = fetch;
 import { ChatGPTAPI } from "chatgpt";
@@ -9,8 +10,15 @@ import {
   NameTarget,
   nameFormats,
 } from "~/types";
+import { prepareApiKey } from "~/utils/apiKey";
 
 export class GptClient {
+  context: vscode.ExtensionContext;
+
+  constructor(context: vscode.ExtensionContext) {
+    this.context = context;
+  }
+
   namePrompt(
     selectedBlock: string,
     selectedLanguageId: string,
@@ -48,8 +56,9 @@ export class GptClient {
 
   async fetchSuggestionNames(prompt: string) {
     try {
+      const apiKey = await prepareApiKey(this.context);
       const api = new ChatGPTAPI({
-        apiKey: "自分のapikey",
+        apiKey,
       });
       const res = await api.sendMessage(prompt);
       const gptResponse: FetchGptResponse = JSON.parse(res.text);
