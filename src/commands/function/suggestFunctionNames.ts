@@ -11,13 +11,21 @@ export const suggestFunctionNames = async () => {
     const gptClient = new GptClient();
     const selectedText = editorClient.getSelectedText();
     const languageId = editorClient.getSelectedFileLanguageId();
-    const prompt = gptClient.functionNamePrompt(selectedText, languageId, nameSettings as NameSettings);
+    const prompt = gptClient.namePrompt(
+      selectedText,
+      languageId,
+      nameSettings as NameSettings,
+      "function",
+    );
 
     try {
       const suggestionNames = await gptClient.fetchSuggestionNames(prompt);
 
       // 名前の候補をユーザに提示し、選択させる
-      const pickedName = await editorClient.pickSuggestionName(suggestionNames, "Choose a new function name!");
+      const pickedName = await editorClient.pickSuggestionName(
+        suggestionNames,
+        "Choose a new function name!",
+      );
 
       if (pickedName) {
         // ユーザが選択した名前で、選択範囲の「xxx」の部分を置き換える
@@ -28,4 +36,3 @@ export const suggestFunctionNames = async () => {
     }
   }
 };
-

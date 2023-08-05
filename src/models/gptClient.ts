@@ -1,40 +1,48 @@
 import fetch from "node-fetch";
 (global as any).fetch = fetch;
 import { ChatGPTAPI } from "chatgpt";
-import { FetchGptResponse, NameSettings, NameSettingsKeys } from "~/types";
+import {
+  FetchGptResponse,
+  NameFormat,
+  NameSettings,
+  NameSettingsKeys,
+  NameTarget,
+  nameFormats,
+} from "~/types";
 
 export class GptClient {
-  functionNamePrompt(selectedFunctionText: string, selectedLanguageId: string, nameSettings: NameSettings) {
-    let prompt: string;
-
-    if (this.hasNameSettingsOfLanguageId(selectedLanguageId, nameSettings)) {
-      const functionNameSettings = nameSettings[`${selectedLanguageId}`].function;
-      prompt = `
-        Please come up with six possible names for the following ${selectedLanguageId} functions and output them in the following json format.
-        Each name in the array should be a ${functionNameSettings}.
-        Don't include any explanations in your responses.
-        \`\`\`
-          ${selectedFunctionText}
-        \`\`\`
-
-        \`\`\`json
-          { "result": ["name1", "name2", "name3", "name4", "name5", "name6"] }
-        \`\`\`
-      `;
+  namePrompt(
+    selectedBlock: string,
+    selectedLanguageId: string,
+    nameSettings: NameSettings,
+    namingTarget: NameTarget,
+  ) {
+    if (this.hasNamingRule(selectedLanguageId, nameSettings, namingTarget)) {
+      const nameSetting = nameSettings[selectedLanguageId][namingTarget];
+      return this.createPrompt(selectedLanguageId, selectedBlock, namingTarget, nameSetting);
     } else {
-      prompt = `
-        Please come up with six possible names for the following ${selectedLanguageId} functions and output them in the following json format.
-        Don't include any explanations in your responses.
-        \`\`\`
-          ${selectedFunctionText}
-        \`\`\`
-
-        \`\`\`json
-          { "result": ["name1", "name2", "name3", "name4", "name5", "name6"] }
-        \`\`\`
-      `;
+      return this.createPrompt(selectedLanguageId, selectedBlock, namingTarget);
     }
+  }
 
+  createPrompt(
+    languageId: string,
+    selectedBlock: string,
+    namingTarget: NameTarget,
+    nameSettings?: NameFormat,
+  ) {
+    const prompt = `
+      Please come up with six possible names for the following ${languageId} ${namingTarget} and output them in the following json format.
+      ${nameSettings ? `Each name in the array should be a ${nameSettings}.` : ""}
+      Don't include any explanations in your responses.
+      \`\`\`
+        ${selectedBlock}
+      \`\`\`
+
+      \`\`\`json
+        { "result": ["name1", "name2", "name3", "name4", "name5", "name6"] }
+      \`\`\`
+    `;
     return prompt;
   }
 
@@ -51,10 +59,21 @@ export class GptClient {
       console.log("error:", e);
       throw e;
     }
-  };
+  }
 
-  // todo: このメソッドをこのクラスの中に書くかは悩みどころ。
-  hasNameSettingsOfLanguageId(languageId: string, nameSettings: NameSettings): languageId is NameSettingsKeys {
-    return Object.keys(nameSettings).includes(languageId);
+  hasNamingRule(
+    selectedLanguageId: string,
+    nameSettings: NameSettings,
+    nameTarget: NameTarget,
+  ): selectedLanguageId is NameSettingsKeys {
+    if (selectedLanguageId in nameSettings) {
+      const nameRule = nameSettings[selectedLanguageId as NameSettingsKeys];
+      if (!(nameTarget in nameRule) && !nameRule[nameTarget]) {
+        return false;
+      }
+      return nameFormats.includes(nameRule[nameTarget]!);
+    } else {
+      return false;
+    }
   }
 }
