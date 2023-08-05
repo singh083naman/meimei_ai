@@ -1,6 +1,6 @@
 {
-  "name": "meimei-ai",
-  "displayName": "meimei_ai",
+  "name": "mei-ai",
+  "displayName": "mei-ai",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -16,21 +16,54 @@
   "contributes": {
     "commands": [
       {
-        "command": "meimei-ai.suggest-function-names",
-        "title": "meimei-ai: suggest function names"
-      }
-    ],
-    "keybindings": [
+        "command": "mei-ai.suggest-function-names",
+        "title": "mei-ai: suggest function names"
+      },
       {
-          "command": "meimei-ai.suggest-function-names",
-          "key": "alt+cmd+m",
-          "mac": "alt+cmd+m"
+        "command": "mei-ai.suggest-class-names",
+        "title": "mei-ai: suggest class names"
+      },
+      {
+        "command": "mei-ai.suggest-struct-names",
+        "title": "mei-ai: suggest struct names"
+      },
+      {
+        "command": "mei-ai.suggest-method-names",
+        "title": "mei-ai: suggest method names"
+      },
+      {
+        "command": "mei-ai.suggest-variable-names",
+        "title": "mei-ai: suggest variable names"
+      },
+      {
+        "command": "mei-ai.change-api-key",
+        "title": "mei-ai: change api key"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "meimei-ai.suggest-function-names",
+          "command": "mei-ai.suggest-function-names",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "mei-ai.suggest-class-names",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "mei-ai.suggest-struct-names",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "mei-ai.suggest-method-names",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "mei-ai.suggest-variable-names",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "mei-ai.change-api-key",
           "when": "editorHasSelection"
         }
       ]
