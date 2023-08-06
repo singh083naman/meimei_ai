@@ -1,4 +1,5 @@
-import nameSettings from "name-settings.json";
+import * as vscode from "vscode";
+const config = vscode.workspace.getConfiguration("mai-ai.settings");
 
 export type FetchGptResponse = {
   result: string[];
@@ -6,7 +7,7 @@ export type FetchGptResponse = {
 
 export type NameFormat = "lower camel case" | "upper camel case" | "snake case";
 export const nameFormats = ["lower camel case", "upper camel case", "snake case"];
-export type NameSettingsKeys = keyof typeof nameSettings;
+export type NameSettingsKeys = keyof typeof config;
 export type NameTarget = "class" | "struct" | "function" | "method" | "variable";
 export type NameSettings = {
   [language in NameSettingsKeys]: {
