@@ -1,69 +1,27 @@
 # mei-ai README
 
-## Features
+## What is mei-ai
+mei-ai is an extension that helps in naming functions, variables, methods, and classes using ChatGPT.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+**Notice:**
+This extension requires a paid subscription to Open-AI, open source api key will not work. Please get an API-key of a paid subscribed account of Open-AI
 
-For example if there is an image subfolder under your extension project workspace:
+## How to use
+1. Install mei-ai extension.
+2. Write xxx for the part you want to name. In the case of a variable, also write a comment.
+3. Select the code that you want a name suggestion for, right click and select one option starting with *"mei-ai"* from the various options for name suggestion.
+4. An form will appear, please enter your api key. The api key is now set. (This is only required the first time after installing this extension)
+6. Click on the appropriate name when a list of possible names is displayed.
+7. xxx will be replaced by the selected name
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+## Default Keybindings
+|  Command  |  Keybinding  |
+| ---- | ---- |
+|  mei-ai: change api key  |  option + command + a  |
+|  mei-ai: suggest class names  | option + command + c   |
+|  mei-ai: suggest function names  |  option + command + f  |
+|  mei-ai: suggest method names  |  option + command + m  |
+|  mei-ai: suggest struct names  |  option + command + s  |
+|  mei-ai: suggest variable names  | option + command + v   |
 
 **Enjoy!**
