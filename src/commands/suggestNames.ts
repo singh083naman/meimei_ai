@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { EditorClient, GptClient } from "~/models";
 import { NameSettings, NameTarget } from "~/types";
 
-const config = vscode.workspace.getConfiguration("mai-ai.settings");
+const config = vscode.workspace.getConfiguration("mei-ai.settings");
 
 export const suggestNames = async (apiKey: string, namingTarget: NameTarget) => {
   const editor = vscode.window.activeTextEditor;

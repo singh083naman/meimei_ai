@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-const config = vscode.workspace.getConfiguration("mai-ai.settings").get;
+const config = vscode.workspace.getConfiguration("mei-ai.settings").get;
 
 export type FetchGptResponse = {
   result: string[];
