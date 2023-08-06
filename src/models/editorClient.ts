@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import nameSettings from "~/name-settings.json";
 
 export class EditorClient {
   editor: vscode.TextEditor;
