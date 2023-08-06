@@ -39,15 +39,15 @@ export function activate(context: vscode.ExtensionContext) {
   const defaultKeybindings = [
     {
       command: 'mei-ai.suggest-function-names',
-      key: 'alt+cmd+m'
+      key: 'alt+cmd+f'
     },
     {
       command: 'mei-ai.suggest-class-names',
-      key: 'alt+cmd+m'
+      key: 'alt+cmd+c'
     },
     {
       command: 'mei-ai.suggest-struct-names',
-      key: 'alt+cmd+m'
+      key: 'alt+cmd+s'
     },
     {
       command: 'mei-ai.suggest-method-names',
@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
     },
     {
       command: 'mei-ai.suggest-variable-names',
-      key: 'alt+cmd+m'
+      key: 'alt+cmd+v'
     },
     {
       command: 'mei-ai.change-api-key',
