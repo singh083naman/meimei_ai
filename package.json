@@ -40,6 +40,44 @@
         "title": "mei-ai: change api key"
       }
     ],
+    "keybindings": [
+      {
+        "command": "mei-ai.suggest-function-names",
+        "key": "alt+ctrl+f",
+        "mac": "alt+cmd+f",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "mei-ai.suggest-class-names",
+        "key": "alt+ctrl+c",
+        "mac": "alt+cmd+c",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "mei-ai.suggest-struct-names",
+        "key": "alt+ctrl+s",
+        "mac": "alt+cmd+s",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "mei-ai.suggest-method-names",
+        "key": "alt+ctrl+m",
+        "mac": "alt+cmd+m",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "mei-ai.suggest-variable-names",
+        "key": "alt+ctrl+v",
+        "mac": "alt+cmd+v",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "mei-ai.change-api-key",
+        "key": "alt+ctrl+a",
+        "mac": "alt+cmd+a",
+        "when": "editorHasSelection"
+      }
+    ],
     "menus": {
       "editor/context": [
         {
