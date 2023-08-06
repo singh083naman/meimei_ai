@@ -67,6 +67,35 @@
           "when": "editorHasSelection"
         }
       ]
+    },
+    "configuration": {
+      "title": "mei-ai",
+      "properties": {
+        "mei-ai.settings": {
+          "type": "object",
+          "default": {
+            "ruby": {
+              "class": "upper camel case",
+              "function": "snake case",
+              "method": "snake case",
+              "variable": "snake case"
+            },
+            "go": {
+              "struct": "upper camel case",
+              "function": "upper camel case",
+              "method": "upper camel case",
+              "variable": "lower camel case"
+            },
+            "typescript": {
+              "class": "upper camel case",
+              "function": "lower camel case",
+              "method": "lower camel case",
+              "variable": "lower camel case"
+            }
+          },
+          "description": "If you want to set naming conventions by language, please modify it."
+        }
+      }
     }
   },
   "scripts": {

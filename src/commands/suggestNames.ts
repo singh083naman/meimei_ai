@@ -1,7 +1,8 @@
 import * as vscode from "vscode";
 import { EditorClient, GptClient } from "~/models";
-import nameSettings from "~/name-settings.json";
 import { NameSettings, NameTarget } from "~/types";
+
+const config = vscode.workspace.getConfiguration("mei-ai.settings");
 
 export const suggestNames = async (apiKey: string, namingTarget: NameTarget) => {
   const editor = vscode.window.activeTextEditor;
@@ -14,7 +15,7 @@ export const suggestNames = async (apiKey: string, namingTarget: NameTarget) => 
     const prompt = gptClient.namePrompt(
       selectedText,
       languageId,
-      nameSettings as NameSettings,
+      config as NameSettings,
       namingTarget,
     );
 
