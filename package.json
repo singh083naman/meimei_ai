@@ -2,7 +2,7 @@
   "name": "mei-ai",
   "displayName": "mei-ai",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -168,5 +168,6 @@
     "chatgpt": "^5.2.5",
     "node-fetch": "^3.3.2"
   },
-  "icon": "icon.png"
+  "icon": "icon.png",
+  "publisher": ""
 }
